@@ -1,0 +1,18 @@
+{
+	"folders": [
+		{
+			"path": "/home/flourigh/Documents/Workspace/RobertoMonteiro/sommexe-com-br-catalog-mobile"
+		}
+	],
+	"settings": {
+    "eslint.enable": true,
+    "eslint.autoFixOnSave": true,
+    "eslint.validate": [
+      "javascript",
+      "vue",
+      "stylus",
+      "html",
+      "json"
+    ]
+  }
+}
