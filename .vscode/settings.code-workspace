@@ -8,11 +8,9 @@
     "eslint.enable": true,
     "eslint.autoFixOnSave": true,
     "eslint.validate": [
-      "javascript",
-      "vue",
-      "stylus",
-      "html",
-      "json"
+      { "language": "javascript", "autoFix": true },
+      { "language": "vue", "autoFix": true },
+      { "language": "html", "autoFix": true }
     ]
   }
 }
