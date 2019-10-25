@@ -1,6 +1,7 @@
 <template>
   <v-app
     light
+    style="height: 1000px"
   >
     <router-view
       name="toolbar"
