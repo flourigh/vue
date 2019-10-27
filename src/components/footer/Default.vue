@@ -1,5 +1,8 @@
 <template>
   <v-footer
+    color="white"
+    class="max-width-480 mx-auto"
+    absolute
     app
   >
     <v-btn

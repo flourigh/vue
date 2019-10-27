@@ -1,4 +1,4 @@
-const fender = {
+export default {
   nome: [
     'Baixo Fender',
     'Baixo Fender'
@@ -10,6 +10,10 @@ const fender = {
   preco: [
     '3.500',
     '2.300'
+  ],
+  imagem: [
+    require('@/assets/img/categoria/baixo-fender-original-american-bass.png'),
+    require('@/assets/img/categoria/baixo-fender-precision-stratocaster.png')
   ],
   especificacao: [
     {
@@ -57,8 +61,4 @@ const fender = {
       ]
     }
   ]
-}
-
-export default {
-  fender
 }
