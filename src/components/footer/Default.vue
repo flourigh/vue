@@ -6,7 +6,7 @@
       v-for="(next, i) in footer.icon"
       :key="i"
       property="sameAs"
-      class="mx-4"
+      class="mx-0"
       :href="footer.link[i]"
       :title="footer.link[i]"
       :alt="footer.link[i]"

@@ -1,8 +1,11 @@
 export default {
   title: 'Som Mexe Music - Catalog',
+
   toggle: {
-    drawer: false
+    drawer: false,
+    search: false
   },
+
   footer: {
     icon: [
       'fab fa-youtube',
@@ -13,6 +16,7 @@ export default {
       'fab fa-google',
       'fas fa-map-marked-alt'
     ],
+
     link: [
       'https://www.youtube.com/user/sommexe',
       'https://www.instagram.com/Renatosommexe',
