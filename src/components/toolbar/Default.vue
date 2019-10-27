@@ -108,6 +108,12 @@
       ...mapGetters('Search', [ 'categoria' ])
     },
 
+    watch: {
+      'form.input.search' (value) {
+        this.gotoCategoria({ categoria: this.catalog.home.filter(o => o.nome === value)[0].categoria })
+      }
+    },
+
     methods: {
       ...mapActions('Document', [ 'actionToggle' ]),
 
@@ -117,6 +123,10 @@
 
       search () {
         this.actionToggle({ key: 'search', value: !this.toggle.search })
+      },
+
+      gotoCategoria (next) {
+        location.assign(`/categoria/${next.categoria}`)
       },
 
       getBackground () {
