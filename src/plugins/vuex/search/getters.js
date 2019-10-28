@@ -1,5 +1,5 @@
-const categoria = (state) => (location, find) => {
-  return state.catalog[location].map(o => o[find])
+const categoria = (state) => (categoria, find) => {
+  return state.catalog[categoria].map(o => o[find])
 }
 
 const item = (state) => (item, key) => {

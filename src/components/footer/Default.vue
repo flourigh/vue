@@ -1,7 +1,7 @@
 <template>
   <v-footer
     color="white"
-    class="max-width-480 mx-auto"
+    class="max-width-412 mx-auto"
     absolute
     app
   >

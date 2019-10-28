@@ -1,6 +1,6 @@
 <template>
   <v-container
-    class="pa-0 ma-0 mx-auto max-width-480 pb-5"
+    class="pa-0 ma-0 mx-auto max-width-412 pb-5"
   >
     <v-card
       v-for="(next, i) in catalog.home"
@@ -82,11 +82,11 @@
 
     methods: {
       gotoItem (next) {
-        location.assign(`/item/${next.categoria}/${next.descricao.replace(/ /g, '').toLowerCase()}`)
+        this.$router.push(`/item/${next.categoria}/${next.descricao.replace(/ /g, '').toLowerCase()}`)
       },
 
       gotoCategoria (next) {
-        location.assign(`/categoria/${next.categoria}`)
+        this.$router.push(`/categoria/${next.categoria}`)
       },
 
       addCart (next) {
