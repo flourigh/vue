@@ -3,31 +3,20 @@
     class="pa-0 ma-0 mx-auto max-width-480 white"
   >
     <v-card
-      v-for="(next, i) in list.nome"
-      :key="i"
       class="pa-0 ma-0 mb-5 pb-5 white"
       flat
       tile
     >
       <v-img
-        :src="returnList('imagem')[i]"
+        :src="item($route.params, 'imagem')"
         class="pa-0 ma-0 elevation-4"
       >
-        <v-card-title
-          class="white--text pa-0 ma-0 pt-5 mt-5 mr-5"
-        >
-          <v-spacer />
-          <h4 class="text-uppercase">
-            Modelos
-          </h4>
-        </v-card-title>
-
         <v-card-title
           class="error--text pa-0 ma-0 pt-5 mt-5 mr-5"
         >
           <v-spacer />
           <h2>
-            {{ next }}
+            {{ item($route.params, 'nome') }}
           </h2>
         </v-card-title>
 
@@ -36,7 +25,7 @@
         >
           <v-spacer />
           <h3>
-            {{ returnList('descricao')[i] }}
+            {{ item($route.params, 'descricao') }}
           </h3>
         </v-card-title>
 
@@ -44,7 +33,7 @@
           class="text-right pt-1 mt-5"
         >
           <h1 class="white--text pb-4">
-            R$ {{ returnList('preco')[i] }}
+            R$ {{ item($route.params, 'preco') }}
           </h1>
 
           <v-btn
@@ -53,7 +42,7 @@
             dark
             small
             rounded
-            @click="addCart(next, i)"
+            @click="addCart()"
           >
             Compre já
             <v-icon
@@ -67,7 +56,7 @@
 
           <v-container>
             <v-row
-              v-for="(item, iList) in returnList('especificacao')[i]"
+              v-for="(especificacaoList, iList) in item($route.params, 'especificacao')"
               :key="iList"
               class="mb-2"
               justify="end"
@@ -76,13 +65,13 @@
               <v-col
                 class="white--text max-width-110"
               >
-                <h4>{{ returnList('especificacao')[i][iList][0] }}</h4>
+                <h4>{{ especificacaoList[0] }}</h4>
               </v-col>
 
               <v-col
                 class="white--text max-width-80"
               >
-                <h4>{{ returnList('especificacao')[i][iList][1] }}</h4>
+                <h4>{{ item($route.params, 'especificacao')[iList][1] }}</h4>
               </v-col>
             </v-row>
           </v-container>
@@ -93,32 +82,36 @@
 </template>
 
 <script>
-  import { mapState } from 'vuex'
+  import { mapState, mapGetters } from 'vuex'
+
+  import keyFind from '@/plugins/mixins/keyfind'
 
   export default {
-    props: {
-      list: {
-        type: Object,
-        default: undefined
-      }
-    },
+    mixins: [
+      keyFind
+    ],
 
     computed: {
-      ...mapState('Search', [ 'link', 'catalog' ])
+      ...mapState('Search', [ 'link', 'catalog' ]),
+      ...mapGetters('Search', [ 'item' ])
+    },
+
+    created () {
+      if (
+        !this.keyFind(this.catalog.categoria, this.$route.params.categoria) ||
+        !this.keyFind(this.catalog.categoria, this.$route.params.marca)
+      ) this.$router.push('/')
     },
 
     methods: {
-      returnList (key) {
-        return this.catalog.categoria.baixo.fender[key]
-      },
-
-      addCart (next, i) {
+      addCart () {
         let url = {
-          descricao: this.returnList('descricao')[i],
-          preco: this.returnList('preco')[i]
+          nome: this.item(this.$route.params, 'nome'),
+          descricao: this.item(this.$route.params, 'descricao'),
+          preco: this.item(this.$route.params, 'preco')
         }
 
-        window.open(encodeURI(`${this.link.cart}${next}\n${url.descricao}\n${url.preco}`), '_blank')
+        window.open(encodeURI(`${this.link.cart}${url.nome}\n${url.descricao}\n${url.preco}`), '_blank')
       }
     }
   }
