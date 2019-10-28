@@ -1,7 +1,7 @@
 <template>
   <v-card
     height="188"
-    width="480"
+    width="412"
     class="mx-auto"
     flat
     tile
@@ -9,6 +9,7 @@
     <v-toolbar
       color="transparent"
       prominent
+      extended
       flat
       :src="getBackground()"
       height="140"
@@ -27,11 +28,12 @@
       <v-img
         :src="getLogo()"
         contain
-        height="64"
         class="pt-5 mt-5"
+        height="64"
+        width="270"
       />
 
-      <v-spacer />
+      <!-- {{ $vuetify.breakpoint.width }} -->
 
       <v-btn
         icon
@@ -126,7 +128,7 @@
       },
 
       gotoCategoria (next) {
-        location.assign(`/categoria/${next.categoria}`)
+        this.$router.push(`/categoria/${next.categoria}`)
       },
 
       getBackground () {
