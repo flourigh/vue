@@ -1,6 +1,6 @@
 <template>
   <v-container
-    class="pa-0 ma-0 mx-auto max-width-480 white"
+    class="pa-0 ma-0 mx-auto max-width-412 white"
   >
     <v-card
       class="pa-0 ma-0 mb-5 pb-5 white"

@@ -8,12 +8,14 @@
       multiple
       accordion
     >
-      <h3
-        class="py-5"
+      <v-btn
+        text
+        large
+        class="mb-5"
         @click="openLink('/')"
       >
         {{ title }}
-      </h3>
+      </v-btn>
 
       <v-expansion-panel
         v-for="(next, i) in catalog.home"
@@ -84,14 +86,14 @@
 
       openLink (param, item) {
         if (param === '/') {
-          location.assign('/')
+          this.$router.push('/')
           return
         }
 
         if (item) {
-          location.assign(`/item/${param}/${item.replace(/ /g, '').toLowerCase()}`)
+          this.$router.push(`/item/${param}/${item.replace(/ /g, '').toLowerCase()}`)
         } else {
-          location.assign(`/categoria/${param}`)
+          this.$router.push(`/categoria/${param}`)
         }
       },
 
