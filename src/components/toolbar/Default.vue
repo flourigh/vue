@@ -1,6 +1,6 @@
 <template>
   <v-card
-    height="176"
+    height="188"
     width="375"
     class="mx-auto"
     flat
@@ -10,13 +10,13 @@
       color="transparent"
       prominent
       flat
-      src="https://picsum.photos/1920/1080?random"
+      :src="require('@/assets/img/pessoas-levantando-instrumentos.png')"
+      height="140"
       dark
     >
       <template v-slot:img="{ props }">
         <v-img
           v-bind="props"
-          gradient="to top right, rgba(100,115,201,.7), rgba(25,32,72,.7)"
         />
       </template>
 
@@ -24,56 +24,83 @@
         @click="drawer()"
       />
 
-      <v-toolbar-title class="pb-5 mb-5">
-        {{ title }}
+      <v-toolbar-title
+        class="pb-5 mb-5"
+      >
+        <v-img
+          :src="require('@/assets/img/logo-sommexe.png')"
+          contain
+          height="64"
+        />
       </v-toolbar-title>
 
-      <v-spacer />
-
-      <v-btn icon>
+      <v-btn
+        icon
+        @click="search()"
+      >
         <v-icon>
           mdi-magnify
         </v-icon>
       </v-btn>
 
-      <template v-slot:extension>
-        <v-autocomplete
-          placeholder="Buscar"
-          :items="states"
-          rounded
-          solo
-          light
-        />
+      <template
+        v-slot:extension
+      >
+        <v-slide-y-transition>
+          <v-form
+            v-if="toggle.search"
+            v-model="form.search"
+            class="max-width-200 mx-auto pb-5 mb-3"
+          >
+            <v-autocomplete
+              v-model="form.input.search"
+              :rules="form.rules.search"
+              placeholder="Buscar"
+              :items="categorias('home', 'nome')"
+              rounded
+              solo
+              light
+              dense
+              auto-select-first
+              no-data-text="Não achei ):"
+              autofocus
+              append-icon=""
+              color="accent"
+              item-color="accent"
+              required
+              hide-details
+            />
+          </v-form>
+        </v-slide-y-transition>
       </template>
     </v-toolbar>
   </v-card>
 </template>
 
 <script>
-  import { mapState, mapActions } from 'vuex'
+  import { mapState, mapActions, mapGetters } from 'vuex'
 
   export default {
     data: () => ({
-      states: [
-        'Alabama', 'Alaska', 'American Samoa', 'Arizona',
-        'Arkansas', 'California', 'Colorado', 'Connecticut',
-        'Delaware', 'District of Columbia', 'Federated States of Micronesia',
-        'Florida', 'Georgia', 'Guam', 'Hawaii', 'Idaho',
-        'Illinois', 'Indiana', 'Iowa', 'Kansas', 'Kentucky',
-        'Louisiana', 'Maine', 'Marshall Islands', 'Maryland',
-        'Massachusetts', 'Michigan', 'Minnesota', 'Mississippi',
-        'Missouri', 'Montana', 'Nebraska', 'Nevada',
-        'New Hampshire', 'New Jersey', 'New Mexico', 'New York',
-        'North Carolina', 'North Dakota', 'Northern Mariana Islands', 'Ohio',
-        'Oklahoma', 'Oregon', 'Palau', 'Pennsylvania', 'Puerto Rico',
-        'Rhode Island', 'South Carolina', 'South Dakota', 'Tennessee',
-        'Texas', 'Utah', 'Vermont', 'Virgin Island', 'Virginia',
-        'Washington', 'West Virginia', 'Wisconsin', 'Wyoming'
-      ]
+      form: {
+        search: false,
+
+        input: {
+          search: ''
+        },
+
+        rules: {
+          search: [
+            v => !!v || 'Escolha uma opção da lista'
+          ]
+        }
+      }
     }),
 
     computed: {
-      ...mapState('Document', [ 'title', 'toggle' ])
+      ...mapState('Document', [ 'toggle' ]),
+      ...mapState('Search', [ 'catalog' ]),
+      ...mapGetters('Search', [ 'categorias' ])
     },
 
     methods: {
@@ -81,6 +108,10 @@
 
       drawer () {
         this.actionToggle({ key: 'drawer', value: !this.toggle.drawer })
+      },
+
+      search () {
+        this.actionToggle({ key: 'search', value: !this.toggle.search })
       }
     }
   }
