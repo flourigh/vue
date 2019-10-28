@@ -1,7 +1,7 @@
 <template>
   <v-card
     height="188"
-    width="375"
+    width="480"
     class="mx-auto"
     flat
     tile
@@ -10,7 +10,7 @@
       color="transparent"
       prominent
       flat
-      :src="require('@/assets/img/pessoas-levantando-instrumentos.png')"
+      :src="getBackground()"
       height="140"
       dark
     >
@@ -24,15 +24,14 @@
         @click="drawer()"
       />
 
-      <v-toolbar-title
-        class="pb-5 mb-5"
-      >
-        <v-img
-          :src="require('@/assets/img/logo-sommexe.png')"
-          contain
-          height="64"
-        />
-      </v-toolbar-title>
+      <v-img
+        :src="getLogo()"
+        contain
+        height="64"
+        class="pt-5 mt-5"
+      />
+
+      <v-spacer />
 
       <v-btn
         icon
@@ -56,7 +55,7 @@
               v-model="form.input.search"
               :rules="form.rules.search"
               placeholder="Buscar"
-              :items="categorias('home', 'nome')"
+              :items="categoria('home', 'nome')"
               rounded
               solo
               light
@@ -80,7 +79,13 @@
 <script>
   import { mapState, mapActions, mapGetters } from 'vuex'
 
+  import keyFind from '@/plugins/mixins/keyfind'
+
   export default {
+    mixins: [
+      keyFind
+    ],
+
     data: () => ({
       form: {
         search: false,
@@ -100,7 +105,13 @@
     computed: {
       ...mapState('Document', [ 'toggle' ]),
       ...mapState('Search', [ 'catalog' ]),
-      ...mapGetters('Search', [ 'categorias' ])
+      ...mapGetters('Search', [ 'categoria' ])
+    },
+
+    watch: {
+      'form.input.search' (value) {
+        this.gotoCategoria({ categoria: this.catalog.home.filter(o => o.nome === value)[0].categoria })
+      }
     },
 
     methods: {
@@ -112,6 +123,20 @@
 
       search () {
         this.actionToggle({ key: 'search', value: !this.toggle.search })
+      },
+
+      gotoCategoria (next) {
+        location.assign(`/categoria/${next.categoria}`)
+      },
+
+      getBackground () {
+        if (this.keyFind(this.$route.meta, 'background')) return this.$route.meta.toolbar.background
+        return require('@/assets/img/pessoas-levantando-instrumentos.png')
+      },
+
+      getLogo () {
+        if (this.keyFind(this.$route.meta, 'logo')) return this.$route.meta.toolbar.logo
+        return require('@/assets/img/logo-sommexe.png')
       }
     }
   }

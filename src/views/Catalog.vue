@@ -1,6 +1,6 @@
 <template>
   <v-container
-    class="pa-0 ma-0 mx-auto max-width-375 white"
+    class="pa-0 ma-0 mx-auto max-width-480 pb-5"
   >
     <v-card
       v-for="(next, i) in catalog.home"
@@ -35,6 +35,7 @@
             dark
             small
             rounded
+            @click="addCart(next)"
           >
             Compre já
             <v-icon
@@ -53,6 +54,7 @@
           <v-btn
             text
             small
+            @click="gotoItem(next)"
           >
             Ver mais
           </v-btn>
@@ -60,6 +62,7 @@
           <v-btn
             text
             small
+            @click="gotoCategoria(next)"
           >
             Modelos no carrinho
           </v-btn>
@@ -74,7 +77,27 @@
 
   export default {
     computed: {
-      ...mapState('Search', [ 'catalog' ])
+      ...mapState('Search', [ 'link', 'catalog' ])
+    },
+
+    methods: {
+      gotoItem (next) {
+        location.assign(`/item/${next.categoria}/${next.descricao.replace(/ /g, '').toLowerCase()}`)
+      },
+
+      gotoCategoria (next) {
+        location.assign(`/categoria/${next.categoria}`)
+      },
+
+      addCart (next) {
+        let url = {
+          nome: next.nome,
+          descricao: next.descricao,
+          preco: next.preco
+        }
+
+        window.open(encodeURI(`${this.link.cart}${url.nome}\n${url.descricao}\n${url.preco}`), '_blank')
+      }
     }
   }
 </script>
