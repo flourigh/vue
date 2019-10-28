@@ -1,7 +1,7 @@
 <template>
-  <v-container>
+  <div>
     <catalog />
-  </v-container>
+  </div>
 </template>
 
 <script>

@@ -10,13 +10,7 @@
       name="drawer"
     />
 
-    <v-content>
-      <v-container
-        fluid
-      >
-        <router-view />
-      </v-container>
-    </v-content>
+    <router-view />
 
     <router-view
       name="footer"
