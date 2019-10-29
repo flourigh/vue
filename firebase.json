@@ -1,6 +1,7 @@
 {
   "hosting": {
     "public": "dist",
+    "site": "beta-catalog-mobile",
     "ignore": [
       "firebase.json",
       "**/.*",

@@ -5,7 +5,9 @@ node_modules
 
 .firebase
 .firebaserc
-# firebase.json
+firebase.json
+
+bitbucket-pipelines.yml
 
 # local env files
 .env.local
