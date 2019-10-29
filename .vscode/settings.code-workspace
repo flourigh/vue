@@ -1,9 +1,9 @@
 {
 	"folders": [
-		{
-			"path": "/home/flourigh/Documents/Workspace/RobertoMonteiro/catalog-mobile"
-		}
-	],
+    {
+      "path": "/home/flourigh/Documents/Workspace/RobertoMonteiro/catalog-mobile"
+    }
+  ],
 	"settings": {
     "eslint.enable": true,
     "eslint.autoFixOnSave": true,
