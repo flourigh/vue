@@ -10,10 +10,14 @@ pipelines:
     - step:
         caches:
           - node
-        script: # Modify the commands below to build your repository.
+        script:
           - npm install
           - npm run lint --fix
           - npm run build
+    - step:
+        name: Beta Deploy
+        deployment: beta-deploy
+        script:
           - pipe: atlassian/firebase-deploy:0.3.4
             variables:
               FIREBASE_TOKEN: $FIREBASE_TOKEN
