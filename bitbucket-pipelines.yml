@@ -10,7 +10,16 @@ pipelines:
     - step:
         caches:
           - node
-        script: # Modify the commands below to build your repository.
+        script:
           - npm install
           - npm run lint --fix
           - npm run build
+    - step:
+        name: Master Deploy
+        deployment: master-deploy
+        script:
+          - pipe: atlassian/firebase-deploy:0.3.4
+            variables:
+              FIREBASE_TOKEN: $FIREBASE_TOKEN
+              PROJECT_ID: 'master-flourigh'
+              EXTRA_ARGS: '--only hosting:master-catalog-mobile'
