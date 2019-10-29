@@ -14,3 +14,8 @@ pipelines:
           - npm install
           - npm run lint --fix
           - npm run build
+          - pipe: atlassian/firebase-deploy:0.3.4
+            variables:
+              FIREBASE_TOKEN: $FIREBASE_TOKEN
+              PROJECT_ID: 'beta-flourigh'
+              EXTRA_ARGS: '--only hosting:beta-catalog-mobile'
