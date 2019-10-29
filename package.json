@@ -1,11 +1,11 @@
 {
-  "name": "sommexe-com-br-catalog-mobile",
+  "name": "beta-catalog-mobile",
   "version": "0.1.0",
   "private": true,
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
-    "deploy": "vue-cli-service build && firebase deploy --only hosting:sommexe-com-br-catalog-mobile",
+    "deploy": "vue-cli-service build && firebase deploy --only hosting:beta-catalog-mobile",
     "lint": "vue-cli-service lint"
   },
   "dependencies": {
