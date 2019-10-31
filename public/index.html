@@ -4,43 +4,26 @@
     <meta charset="utf-8" />
     <meta http-equiv="Content-Language" content="pt-br, en" />
 
-    <meta name="theme-color" content="<%= VUE_APP_META_COLOR %>" />
-    <meta name="mobile-web-app-capable" content="yes" />
-    <meta name="apple-mobile-web-app-capable" content="yes" />
-    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
-    <meta name="viewport" content="width=device-width,initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="robots" content="index, follow" />
+    <meta name="googlebot" content="index,follow" />
 
-    <title><%= VUE_APP_BRAND_TITLE %></title>
-    <meta name="application-name" content="<%= VUE_APP_BRAND_TITLE %>" />
-    <meta name="apple-mobile-web-app-title" content="<%= VUE_APP_BRAND_TITLE %>" />
-    <meta name="description" content="<%= VUE_APP_BRAND_DESCRIPTION %>" />
-    <meta name="keywords" content="<%= VUE_APP_META_KEYWORD %>" />
-    <link rel="canonical" href="<%= VUE_APP_META_CANONICAL %>" />
+    <title><%= htmlWebpackPlugin.options.title %></title>
+    <meta name="application-name" content="<%= htmlWebpackPlugin.options.title %>" />
+    <meta name="description" content="<%= htmlWebpackPlugin.options.description %>" />
+    <meta name="subject" content="<%= htmlWebpackPlugin.options.subject %>" />
 
-    <link rel="icon" href="/img/icons/favicon-32x32.png" />
-    <link rel="icon" sizes="192x192" href="/img/icons/android-chrome-192x192.png" />
-    <link rel="apple-touch-icon" href="/img/icons/apple-touch-icon-180x180.png" />
-    <link rel="mask-icon" href="/img/icons/safari-pinned-tab.svg" color="<%= VUE_APP_META_COLOR %>" />
+    <base href="<%= htmlWebpackPlugin.options.base %>" />
+    <link rel="canonical" href="<%= htmlWebpackPlugin.options.canonical %>" />
 
-    <meta property="og:title" content="<%= VUE_APP_BRAND_TITLE %>" />
-    <meta property="og:site_name" content="<%= VUE_APP_BRAND_TITLE %>" />
-    <meta property="og:description" content="<%= VUE_APP_BRAND_DESCRIPTION %>" />
-    <meta property="og:url" content="<%= VUE_APP_META_CANONICAL %>" />
-    <meta property="og:image" content="/img/icons/android-chrome-512x512.png" />
-    <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:image:alt" content="<%= VUE_APP_BRAND_DESCRIPTION %>" />
+    <meta name="google-site-verification" content="<%= htmlWebpackPlugin.options.google.VerifyToken %>" />
 
-    <meta property="fb:app_id" content="<%= VUE_APP_FBAPP_ID =>" />
-    <meta name="twitter:site" content="<%= VUE_APP_TWITTERSITE =>" />
-
-    <meta name="ICBM" content="<%= VUE_APP_GEO_ICBM =>" />
-    <meta name="geo.position" content="<%= VUE_APP_GEO_POSITION =>" />
-    <meta name="geo.region" content="<%= VUE_APP_GEO_REGION =>" />
-    <meta name="geo.placename" content="<%= VUE_APP_GEO_PLACENAME =>"/>
-
-    <link rel="me" href="<%= VUE_APP_ME_SOCIAL =>" type="text/html" />
+    <meta name="DC.title" content="<%= htmlWebpackPlugin.options.geotag.DcTitle %>" />
+    <meta name="geo.region" content="<%= htmlWebpackPlugin.options.geotag.GeoRegion %>" />
+    <meta name="geo.placename" content="<%= htmlWebpackPlugin.options.geotag.GeoPlacename %>" />
+    <meta name="geo.position" content="<%= htmlWebpackPlugin.options.geotag.GeoPosition %>" />
+    <meta name="ICBM" content="<%= htmlWebpackPlugin.options.geotag.Icbm %>" />
 
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900" />
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Material+Icons" />
@@ -50,9 +33,7 @@
   </head>
   <body>
     <noscript>
-      <strong>
-        Por favor, atualize seu navegador e tente novamente.
-      </strong>
+      Por favor, atualize seu navegador e tente novamente.
     </noscript>
 
     <div id="app" />

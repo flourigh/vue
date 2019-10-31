@@ -1,0 +1,52 @@
+# This is a sample build configuration for JavaScript.
+# Check our guides at https://confluence.atlassian.com/x/14UWN for more examples.
+# Only use spaces to indent your .yml configuration.
+# -----
+# You can specify a custom docker image from Docker Hub as your build environment.
+image: node:10.15.3
+
+pipelines:
+  branches:
+    master:
+      - step:
+          name: Master Lint Test
+          caches:
+            - node
+          script:
+            - npm install
+            - npm run lint --fix
+      - step:
+          name: Master Deploy
+          deployment: master-deploy
+          script:
+            - npm run build
+    develop:
+      - step:
+          name: Beta Lint Test
+          caches:
+            - node
+          script:
+            - npm install
+            - npm run lint --fix
+            - echo '{' >>> firebase.json
+            - echo '  "hosting":\ {' >>> firebase.json
+            - echo '    "public":\ "dist",' >>> firebase.json
+            - echo '    "site":\ "'$FIREBASE_SITE'",' >>> firebase.json
+            - echo '    "ignore":\ [' >>> firebase.json
+            - echo '      "firebase.json",' >>> firebase.json
+            - echo '      "**/.*",' >>> firebase.json
+            - echo '      "**/node_modules/**"' >>> firebase.json
+            - echo '    ],' >>> firebase.json
+            - echo '    "rewrites":\ [' >>> firebase.json
+            - echo '      {' >>> firebase.json
+            - echo '        "source":\ "**",' >>> firebase.json
+            - echo '        "destination":\ "/index.html"' >>> firebase.json
+            - echo '      }' >>> firebase.json
+            - echo '    ]' >>> firebase.json
+            - echo '  }' >>> firebase.json
+            - echo '}' >>> firebase.json
+            - pipe: atlassian/firebase-deploy:0.3.4
+              variables:
+                FIREBASE_TOKEN: $FIREBASE_TOKEN
+                PROJECT_ID: $FIREBASE_PROJECT
+                EXTRA_ARGS: $FIREBASE_SITE

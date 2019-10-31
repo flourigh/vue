@@ -7,8 +7,6 @@ node_modules
 .firebaserc
 firebase.json
 
-bitbucket-pipelines.yml
-
 # local env files
 .env.local
 .env.*.local

@@ -5,7 +5,7 @@ import router from '@/plugins/router'
 import store from '@/plugins/vuex'
 import vuetify from '@/plugins/vuetify'
 
-import '@/registerServiceWorker'
+import '@/plugins/sw'
 
 Vue.config.productionTip = false
 

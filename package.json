@@ -1,11 +1,11 @@
 {
-  "name": "beta-catalog-mobile",
-  "version": "0.1.0",
+  "name": "catalogo-mobile",
+  "version": "0.0.2",
   "private": true,
   "scripts": {
     "serve": "vue-cli-service serve",
+    "test": "npm run build && serve -s dist",
     "build": "vue-cli-service build",
-    "deploy": "vue-cli-service build && firebase deploy --only hosting:beta-catalog-mobile",
     "lint": "vue-cli-service lint"
   },
   "dependencies": {
