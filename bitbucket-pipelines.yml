@@ -19,6 +19,7 @@ pipelines:
           name: Master Deploy
           deployment: master-deploy
           script:
+            - npm install
             - npm run build
     develop:
       - step:
