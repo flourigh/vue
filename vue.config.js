@@ -45,11 +45,6 @@ module.exports = {
       short_name: 'Catalogo',
       start_url: `./index.html?home=${Version}`,
       display: 'fullscreen'
-    },
-
-    workboxPluginMode: 'InjectManifest',
-    workboxOptions: {
-      swSrc: './src/plugins/sw/index.js'
     }
   }
 }
