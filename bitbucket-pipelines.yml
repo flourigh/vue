@@ -15,28 +15,19 @@ pipelines:
           script:
             - npm install
             - npm run lint --fix
+    develop:
       - step:
-          name: Master Deploy
-          deployment: master-deploy
+          name: Beta Deploy
+          deployment: beta-deploy
           script:
             - npm install
             - npm run build
-    develop:
-      - step:
-          name: Beta Lint Test
-          caches:
-            - node
-          script:
-            - npm install
-            - npm run lint --fix
-            - "mkdir dist"
             - "> firebase.json"
             - "> .firebaserc"
-            - "echo \"${BUDDY_EXECUTION_START_DATE}\" >> dist/index.html"
             - "echo '{' >> firebase.json"
             - "echo '  \"hosting\": {' >> firebase.json"
             - "echo '    \"public\": \"dist\",' >> firebase.json"
-            - "echo '    \"site\": \"'${AMBIENT}'-'${BUDDY_PROJECT_NAME_ID}'\",' >> firebase.json"
+            - "echo '    \"site\": \"beta-catalog-mobile\",' >> firebase.json"
             - "echo '    \"ignore\": [' >> firebase.json"
             - "echo '      \"firebase.json\",' >> firebase.json"
             - "echo '      \"**/.*\",' >> firebase.json"
@@ -52,6 +43,6 @@ pipelines:
             - "echo '}' >> firebase.json"
             - "echo '{' >> .firebaserc"
             - "echo '  \"projects\": {' >> .firebaserc"
-            - "echo '    \"default\": \"'${AMBIENT}'-'${FIREBASE_PROJECT}'\"' >> .firebaserc"
+            - "echo '    \"default\": \"beta-flourigh\"' >> .firebaserc"
             - "echo '  }' >> .firebaserc"
             - "echo '}' >> .firebaserc"
