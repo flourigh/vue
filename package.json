@@ -25,6 +25,7 @@
     "eslint": "^5.16.0",
     "eslint-config-vuetify": "^0.4.0",
     "eslint-plugin-vue": "^5.0.0",
+    "firebase-tools": "^7.6.2",
     "lint-staged": "^9.4.2",
     "sass": "^1.19.0",
     "sass-loader": "^8.0.0",
