@@ -14,31 +14,29 @@ jobs:
           - run:
                 name: Install Dependencies
                 command: >
-                    - "npm install" &&
-                    - "> firebase.json" &&
-                    - "> .firebaserc" &&
-                    - "echo '{' >> firebase.json" &&
-                    - "echo '  \"hosting\": {' >> firebase.json" &&
-                    - "echo '    \"public\": \"dist\",' >> firebase.json" &&
-                    - "echo '    \"site\": \"beta-catalog-mobile\",' >> firebase.json" &&
-                    - "echo '    \"ignore\": [' >> firebase.json" &&
-                    - "echo '      \"firebase.json\",' >> firebase.json" &&
-                    - "echo '      \"**/.*\",' >> firebase.json" &&
-                    - "echo '      \"**/node_modules/**\"' >> firebase.json" &&
-                    - "echo '    ],' >> firebase.json" &&
-                    - "echo '    \"rewrites\": [' >> firebase.json" &&
-                    - "echo '      {' >> firebase.json" &&
-                    - "echo '        \"source\": \"**\",' >> firebase.json" &&
-                    - "echo '        \"destination\": \"/index.html\"' >> firebase.json" &&
-                    - "echo '      }' >> firebase.json" &&
-                    - "echo '    ]' >> firebase.json" &&
-                    - "echo '  }' >> firebase.json" &&
-                    - "echo '}' >> firebase.json" &&
-                    - "echo '{' >> .firebaserc" &&
-                    - "echo '  \"projects\": {' >> .firebaserc" &&
-                    - "echo '    \"default\": \"beta-flourigh\"' >> .firebaserc" &&
-                    - "echo '  }' >> .firebaserc" &&
-                    - "echo '}' >> .firebaserc"
+                    npm install &&
+                    echo '{' >> firebase.json &&
+                    echo '  "hosting": {' >> firebase.json &&
+                    echo '    "public": "dist",' >> firebase.json &&
+                    echo '    "site": "beta-catalog-mobile",' >> firebase.json &&
+                    echo '    "ignore": [' >> firebase.json &&
+                    echo '      "firebase.json",' >> firebase.json &&
+                    echo '      "**/.*",' >> firebase.json &&
+                    echo '      "**/node_modules/**"' >> firebase.json &&
+                    echo '    ],' >> firebase.json &&
+                    echo '    "rewrites": [' >> firebase.json &&
+                    echo '      {' >> firebase.json &&
+                    echo '        "source": "**",' >> firebase.json &&
+                    echo '        "destination": "/index.html"' >> firebase.json &&
+                    echo '      }' >> firebase.json &&
+                    echo '    ]' >> firebase.json &&
+                    echo '  }' >> firebase.json &&
+                    echo '}' >> firebase.json &&
+                    echo '{' >> .firebaserc &&
+                    echo '  "projects": {' >> .firebaserc &&
+                    echo '    "default": "beta-flourigh"' >> .firebaserc &&
+                    echo '  }' >> .firebaserc &&
+                    echo '}' >> .firebaserc
           - save_cache:
                 key: v1-npm-deps-{{ checksum "package-lock.json" }}
                 paths:
