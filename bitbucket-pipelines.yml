@@ -55,4 +55,3 @@ pipelines:
             - "echo '    \"default\": \"'${AMBIENT}'-'${FIREBASE_PROJECT}'\"' >> .firebaserc"
             - "echo '  }' >> .firebaserc"
             - "echo '}' >> .firebaserc"
-            - ""
