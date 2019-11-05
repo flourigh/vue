@@ -46,3 +46,8 @@ pipelines:
             - "echo '    \"default\": \"beta-flourigh\"' >> .firebaserc"
             - "echo '  }' >> .firebaserc"
             - "echo '}' >> .firebaserc"
+            - pipe: atlassian/firebase-deploy:0.3.4
+              variables:
+                FIREBASE_TOKEN: $FIREBASE_TOKEN
+                PROJECT_ID: $FIREBASE_PROJECT
+                EXTRA_ARGS: $FIREBASE_DEPLOY
