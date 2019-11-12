@@ -1,5 +1,6 @@
 const {
   Name,
+  Prefix,
   Description,
   Color,
   Version,
@@ -8,11 +9,7 @@ const {
   VerificationToken,
   GeoTag,
   Subject
-} = require('./page')
-
-/** @Todo
-  application-name
-*/
+} = require('./src/plugins/database/page')
 
 module.exports = {
   'transpileDependencies': [
@@ -42,7 +39,7 @@ module.exports = {
     appleMobileWebAppStatusBarStyle: 'black-translucent',
     assetsVersion: Version,
     manifestOptions: {
-      short_name: 'Catalogo',
+      short_name: Prefix,
       start_url: `./index.html?home=${Version}`,
       display: 'fullscreen'
     }

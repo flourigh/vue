@@ -5,7 +5,10 @@ import router from '@/plugins/router'
 import store from '@/plugins/vuex'
 import vuetify from '@/plugins/vuetify'
 
-import '@/plugins/sw'
+/** @Prototypes */
+import uuid from 'uuid/v4'
+Vue.prototype.$uuid = uuid
+/** @Prototypes */
 
 Vue.config.productionTip = false
 

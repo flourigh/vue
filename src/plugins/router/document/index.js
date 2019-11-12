@@ -6,14 +6,6 @@ import {
   wildcard
 } from '@/plugins/router/common'
 
-import {
-  categoria
-} from '@/plugins/router/categoria'
-
-import {
-  item
-} from '@/plugins/router/item'
-
 const originalPush = VueRouter.prototype.push
 VueRouter.prototype.push = function push (location) {
   return originalPush.call(this, location).catch(() => { window.location.assign(location) })
@@ -26,9 +18,7 @@ const router = new VueRouter({
 
   routes: [
     wildcard,
-    home,
-    categoria,
-    item
+    home
   ]
 })
 

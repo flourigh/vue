@@ -1,5 +1,18 @@
+const {
+  Name,
+  Prefix,
+  Description,
+  Subject
+} = require('@/plugins/database/page')
+
 export default {
-  title: 'Som Mexe Music - Catalog',
+  title: Prefix,
+
+  page: {
+    name: Name,
+    description: Description,
+    subject: Subject
+  },
 
   toggle: {
     drawer: false,
@@ -8,23 +21,11 @@ export default {
 
   footer: {
     icon: [
-      'fab fa-youtube',
-      'fab fa-instagram',
-      'fab fa-twitter',
-      'fab fa-facebook',
-      'fab fa-whatsapp',
-      'fab fa-google',
-      'fas fa-map-marked-alt'
+      'fab fa-telegram'
     ],
 
     link: [
-      'https://www.youtube.com/user/sommexe',
-      'https://www.instagram.com/Renatosommexe',
-      'https://www.twitter.com/sommexe',
-      'https://www.facebook.com/sommexe',
-      'https://api.whatsapp.com/send?phone=5521964661433',
-      'https://www.google.com/search?q=Som+Mexe',
-      'https://www.goo.gl/maps/vruB8tJ97RJRxUxU7'
+      'https://t.me/CodeWalkersDevs'
     ]
   }
 }

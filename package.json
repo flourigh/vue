@@ -1,6 +1,6 @@
 {
   "name": "catalogo-mobile",
-  "version": "0.0.2",
+  "version": "0.0.1",
   "private": true,
   "scripts": {
     "serve": "vue-cli-service serve",
@@ -11,6 +11,7 @@
   "dependencies": {
     "core-js": "^3.3.2",
     "register-service-worker": "^1.6.2",
+    "uuid": "^3.3.3",
     "vue": "^2.6.10",
     "vue-router": "^3.1.3",
     "vuetify": "^2.1.0",

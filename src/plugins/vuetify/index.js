@@ -11,17 +11,21 @@ import '@/assets/stylus/right.styl'
 import '@/assets/stylus/bottom.styl'
 import '@/assets/stylus/left.styl'
 
+import colors from 'vuetify/lib/util/colors'
+
 Vue.use(Vuetify)
 
 export default new Vuetify({
   theme: {
+    dark: true,
+
     options: {
       customProperties: true
     },
 
     themes: {
-      light: {
-        accent: '#1D4EF9'
+      dark: {
+        accent: colors.purple
       }
     }
   },

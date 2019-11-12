@@ -1,18 +1,16 @@
 <template>
   <v-card
-    height="188"
     width="412"
     class="mx-auto"
     flat
     tile
   >
     <v-toolbar
+      :src="getBackground()"
       color="transparent"
       prominent
       extended
       flat
-      :src="getBackground()"
-      height="140"
       dark
     >
       <template v-slot:img="{ props }">
@@ -22,20 +20,14 @@
       </template>
 
       <v-app-bar-nav-icon
+        v-if="false"
         @click="drawer()"
       />
 
-      <v-img
-        :src="getLogo()"
-        contain
-        class="pt-5 mt-5"
-        height="64"
-        width="270"
-      />
-
-      <!-- {{ $vuetify.breakpoint.width }} -->
+      <v-spacer />
 
       <v-btn
+        v-if="false"
         icon
         @click="search()"
       >
@@ -53,21 +45,17 @@
             v-model="form.search"
             class="max-width-200 mx-auto pb-5 mb-3"
           >
-            <v-autocomplete
+            <v-text-field
               v-model="form.input.search"
               :rules="form.rules.search"
               placeholder="Buscar"
-              :items="categoria('home', 'nome')"
               rounded
               solo
               light
               dense
-              auto-select-first
-              no-data-text="Não achei ):"
               autofocus
               append-icon=""
               color="accent"
-              item-color="accent"
               required
               hide-details
             />
@@ -79,7 +67,7 @@
 </template>
 
 <script>
-  import { mapState, mapActions, mapGetters } from 'vuex'
+  import { mapState, mapActions } from 'vuex'
 
   import keyFind from '@/plugins/mixins/keyfind'
 
@@ -105,40 +93,23 @@
     }),
 
     computed: {
-      ...mapState('Document', [ 'toggle' ]),
-      ...mapState('Search', [ 'catalog' ]),
-      ...mapGetters('Search', [ 'categoria' ])
-    },
-
-    watch: {
-      'form.input.search' (value) {
-        this.gotoCategoria({ categoria: this.catalog.home.filter(o => o.nome === value)[0].categoria })
-      }
+      ...mapState('Document', [ 'toggle' ])
     },
 
     methods: {
       ...mapActions('Document', [ 'actionToggle' ]),
 
-      drawer () {
-        this.actionToggle({ key: 'drawer', value: !this.toggle.drawer })
-      },
-
       search () {
         this.actionToggle({ key: 'search', value: !this.toggle.search })
       },
 
-      gotoCategoria (next) {
-        this.$router.push(`/categoria/${next.categoria}`)
+      drawer () {
+        this.actionToggle({ key: 'drawer', value: !this.toggle.drawer })
       },
 
       getBackground () {
         if (this.keyFind(this.$route.meta, 'background')) return this.$route.meta.toolbar.background
-        return require('@/assets/img/pessoas-levantando-instrumentos.png')
-      },
-
-      getLogo () {
-        if (this.keyFind(this.$route.meta, 'logo')) return this.$route.meta.toolbar.logo
-        return require('@/assets/img/logo-sommexe.png')
+        return require('@/assets/img/duckstack-banner.jpg')
       }
     }
   }
