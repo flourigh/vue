@@ -3,7 +3,8 @@ import VueRouter from 'vue-router'
 
 import {
   home,
-  wildcard
+  wildcard,
+  uri
 } from '@/plugins/router/common'
 
 const originalPush = VueRouter.prototype.push
@@ -18,7 +19,8 @@ const router = new VueRouter({
 
   routes: [
     wildcard,
-    home
+    home,
+    uri
   ]
 })
 

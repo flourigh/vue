@@ -7,13 +7,11 @@
     >
       <v-card-text>
         <p class="display-1 text--primary">
-          {{ page.description }}
+          {{ page.title }}
         </p>
 
-        <p>{{ page.subject }}</p>
-
         <div class="text--primary">
-          {{ page.name }}
+          Digite um nome para sua página de comentários
         </div>
       </v-card-text>
 
@@ -24,7 +22,7 @@
           block
           @click="action()"
         >
-          Ser um {{ title }}
+          Criar página
         </v-btn>
       </v-card-actions>
     </v-card>
@@ -36,7 +34,7 @@
 
   export default {
     computed: {
-      ...mapState('Document', [ 'title', 'page' ])
+      ...mapState('Document', [ 'page' ])
     },
 
     methods: {

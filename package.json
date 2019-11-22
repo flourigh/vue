@@ -1,5 +1,5 @@
 {
-  "name": "catalogo-mobile",
+  "name": "social-comenter",
   "version": "0.0.1",
   "private": true,
   "scripts": {
@@ -7,9 +7,10 @@
     "test": "npm run build && serve -s dist",
     "build": "vue-cli-service build",
     "lint": "vue-cli-service lint",
-    "deploy": "firebase deploy --only hosting:"
+    "deploy": "firebase deploy --only hosting:socialcomenter"
   },
   "dependencies": {
+    "axios": "^0.19.0",
     "core-js": "^3.3.2",
     "register-service-worker": "^1.6.2",
     "uuid": "^3.3.3",

@@ -14,7 +14,7 @@
         class="mb-5"
         @click="openLink('/')"
       >
-        {{ title }}
+        {{ page.title }}
       </v-btn>
     </v-expansion-panels>
   </v-navigation-drawer>
@@ -25,7 +25,7 @@
 
   export default {
     computed: {
-      ...mapState('Document', [ 'title', 'toggle' ]),
+      ...mapState('Document', [ 'page', 'toggle' ]),
 
       drawer: {
         get () {

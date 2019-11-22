@@ -1,14 +1,7 @@
-import Drawer from '@/components/drawer/Default'
-import Toolbar from '@/components/toolbar/Default'
-import Footer from '@/components/footer/Default'
-
 import Home from '@/views/Home'
+import Coments from '@/views/Coments'
 
-const threeImport = {
-  Drawer,
-  Toolbar,
-  Footer
-}
+import { treeImport } from '@/plugins/router/common/treeImport'
 
 const wildcard = {
     path: '*',
@@ -19,15 +12,24 @@ const home = {
   path: '/',
   name: 'index',
   components: {
-    drawer: threeImport.Drawer,
-    toolbar: threeImport.Toolbar,
+    toolbar: treeImport.Toolbar,
     default: Home,
-    footer: threeImport.Footer
+    footer: treeImport.Footer
+  }
+}
+
+const uri = {
+  path: '/:uri',
+  name: 'coment',
+  components: {
+    toolbar: treeImport.toolbar,
+    default: Coments
   }
 }
 
 export {
-  threeImport,
+  treeImport,
   wildcard,
-  home
+  home,
+  uri
 }
