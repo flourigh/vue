@@ -4,8 +4,9 @@
   "private": true,
   "scripts": {
     "serve": "vue-cli-service serve",
-    "test": "npm run build && serve -s dist",
     "build": "vue-cli-service build",
+    "test": "npm run build && serve -s dist",
+    "ngrok": "ngrok http -host-header=rewrite",
     "lint": "vue-cli-service lint",
     "deploy": "firebase deploy --only hosting:socialcomment"
   },
@@ -23,7 +24,7 @@
   "devDependencies": {
     "@vue/cli-plugin-babel": "^4.0.0",
     "@vue/cli-plugin-eslint": "^4.0.0",
-    "@vue/cli-plugin-pwa": "^4.0.0",
+    "@vue/cli-plugin-pwa": "^4.0.5",
     "@vue/cli-service": "^4.0.0",
     "babel-eslint": "^10.0.3",
     "eslint": "^5.16.0",
