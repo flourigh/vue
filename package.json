@@ -1,5 +1,5 @@
 {
-  "name": "social-comenter",
+  "name": "social-comment",
   "version": "0.0.1",
   "private": true,
   "scripts": {
@@ -7,7 +7,7 @@
     "test": "npm run build && serve -s dist",
     "build": "vue-cli-service build",
     "lint": "vue-cli-service lint",
-    "deploy": "firebase deploy --only hosting:socialcomenter"
+    "deploy": "firebase deploy --only hosting:socialcomment"
   },
   "dependencies": {
     "axios": "^0.19.0",

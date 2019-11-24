@@ -13,9 +13,28 @@
 
       <div class="comments">
         <vue-disqus
-          shortname="socialcomenter"
+          shortname="socialcomment"
+          :title="$route.params.uri"
+          :identifier="$route.params.uri"
+          :url="getUrl()"
         />
       </div>
     </v-card>
   </v-container>
 </template>
+
+<script>
+  import { mapState } from 'vuex'
+
+  export default {
+    computed: {
+      ...mapState('Document', [ 'page' ])
+    },
+
+    methods: {
+      getUrl () {
+        return location.href
+      }
+    }
+  }
+</script>
