@@ -8,10 +8,7 @@ export default {
   },
 
   footer: {
-    icon: [
-    ],
-
-    link: [
-    ]
+    icon: [],
+    link: []
   }
 }

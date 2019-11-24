@@ -1,5 +1,3 @@
-// let Tracking = require('@/plugins/tracking')
-
 const Version = process.env.npm_package_version
 const Title = 'Social Coments'
 const Name = 'Social Coments - Crie uma página e fique a vontade'
@@ -19,18 +17,6 @@ const VerificationToken = {
   Google: 'google-site-verification'
 }
 
-const GeoTag = {
-  DcTitle: 'Rio de Janeiro',
-  GeoRegion: 'BR-RJ',
-  GeoPlacename: 'Rio de Janeiro',
-  GeoPosition: '-22.911014;-43.209373',
-  Icbm: '-22.911014, -43.209373'
-}
-
-// Tracking.then((resolve) => {
-//   console.log(resolve)
-// })
-
 module.exports = {
   Version,
   Name,
@@ -42,6 +28,5 @@ module.exports = {
   Color,
   Canonical,
   BaseURL,
-  VerificationToken,
-  GeoTag
+  VerificationToken
 }

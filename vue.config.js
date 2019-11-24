@@ -1,4 +1,8 @@
 const {
+  GeoTag
+} = require('./src/plugins/tracking/index.js')
+
+const {
   Name,
   Prefix,
   Description,
@@ -7,7 +11,6 @@ const {
   BaseURL,
   Canonical,
   VerificationToken,
-  GeoTag,
   Subject
 } = require('./src/plugins/database/page')
 

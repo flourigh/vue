@@ -39,7 +39,7 @@
 
     methods: {
       action () {
-        this.$router.push(`/comecar/${this.$uuid()}`)
+        this.$router.push(`/${this.$uuid()}`)
       }
     }
   }

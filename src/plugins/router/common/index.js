@@ -1,7 +1,9 @@
 import Home from '@/views/Home'
 import Coments from '@/views/Coments'
 
-import { treeImport } from '@/plugins/router/common/treeImport'
+import {
+  treeImport
+} from '@/plugins/router/common/treeImport'
 
 const wildcard = {
     path: '*',
