@@ -8,6 +8,7 @@ import vuetify from '@/plugins/vuetify'
 /** @Externals */
 import VueDisqus from 'vue-disqus'
 import uuid from 'uuid/v4'
+import './registerServiceWorker'
 /** @Externals */
 
 /** @Prototypes */

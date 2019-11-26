@@ -45,6 +45,7 @@ module.exports = {
       short_name: Prefix,
       start_url: `./index.html?home=${Version}`,
       display: 'fullscreen'
-    }
+    },
+    workboxPluginMode: 'GenerateSW'
   }
 }
