@@ -6,10 +6,6 @@
       name="toolbar"
     />
 
-    <router-view
-      name="drawer"
-    />
-
     <router-view />
 
     <router-view

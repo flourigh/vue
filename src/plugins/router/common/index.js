@@ -1,7 +1,9 @@
 import Home from '@/views/Home'
-import Coments from '@/views/Coments'
+import Comments from '@/views/Comments'
 
-import { treeImport } from '@/plugins/router/common/treeImport'
+import {
+  treeImport
+} from '@/plugins/router/common/treeImport'
 
 const wildcard = {
     path: '*',
@@ -10,7 +12,7 @@ const wildcard = {
 
 const home = {
   path: '/',
-  name: 'index',
+  name: 'home',
   components: {
     toolbar: treeImport.Toolbar,
     default: Home,
@@ -20,10 +22,16 @@ const home = {
 
 const uri = {
   path: '/:uri',
-  name: 'coment',
+  name: 'comment',
   components: {
-    toolbar: treeImport.toolbar,
-    default: Coments
+    toolbar: treeImport.Toolbar,
+    default: Comments,
+    footer: treeImport.Footer
+  },
+  meta: {
+    function: [
+      'share'
+    ]
   }
 }
 

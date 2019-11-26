@@ -1,14 +1,31 @@
-let Axios = require('axios')
+const Axios = require('axios')
 
-let Traking = new Promise((resolve, reject) => {
-  Axios.get('https://ipapi.co/json')
-    .then((response) => {
-      if (!response.data.ip) reject()
+async function getTraking () {
+  try {
+    const response = await Axios.get('https://ipapi.co/json')
+    if (!response.data.ip) throw new Error()
 
-      resolve(response.data)
-    })
-  })
+    // DcTitle: response.city,
+    // GeoRegion: `${response.country}-${response.region_code}`,
+    // GeoPlacename: response.region,
+    // GeoPosition: `${response.latitude};${response.longitude}`,
+    // Icbm: `${response.latitude}, ${response.longitude}`
+
+    return response.data
+  } catch (error) {
+    return error.message
+  }
+}
+
+const GeoTag = {
+  DcTitle: 'Rio de Janeiro',
+  GeoRegion: 'BR-RJ',
+  GeoPlacename: 'Rio de Janeiro',
+  GeoPosition: '-22.911014;-43.209373',
+  Icbm: '-22.911014, -43.209373'
+}
 
 module.exports = {
-  Traking
+  getTraking,
+  GeoTag
 }

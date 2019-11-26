@@ -5,10 +5,19 @@ import router from '@/plugins/router'
 import store from '@/plugins/vuex'
 import vuetify from '@/plugins/vuetify'
 
-/** @Prototypes */
+/** @Externals */
+import VueDisqus from 'vue-disqus'
 import uuid from 'uuid/v4'
+import './registerServiceWorker'
+/** @Externals */
+
+/** @Prototypes */
 Vue.prototype.$uuid = uuid
 /** @Prototypes */
+
+/** @VueUses */
+Vue.use(VueDisqus)
+/** @VueUses */
 
 Vue.config.productionTip = false
 

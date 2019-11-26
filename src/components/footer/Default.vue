@@ -20,9 +20,21 @@
       </v-icon>
     </v-btn>
 
-    <v-spacer />
-
     {{ new Date().getFullYear() }}
+
+    <v-btn
+      v-if="$route.name !== 'home'"
+      color="accent"
+      fab
+      fixed
+      bottom
+      right
+      @click="getHome()"
+    >
+      <v-icon>
+        mdi-plus
+      </v-icon>
+    </v-btn>
   </v-footer>
 </template>
 
@@ -32,6 +44,12 @@
   export default {
     computed: {
       ...mapState('Document', [ 'footer' ])
+    },
+
+    methods: {
+      getHome () {
+        if (this.$route.name !== 'home') this.$router.push('/')
+      }
     }
   }
 </script>
