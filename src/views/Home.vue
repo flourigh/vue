@@ -12,9 +12,14 @@
 
         <v-text-field
           v-for="(keys, i) in uri"
-          :key="i"
+          :id="`password-${i}`"
+          :key="`password-${i}`"
           v-model="uri[i]"
-          color="white"
+          color="accent"
+          readonly
+          :loading="loading"
+          append-icon="mdi-content-copy"
+          @click:append="copy(`password-${i}`)"
         />
       </v-card-text>
 
@@ -25,7 +30,7 @@
           height="56"
           color="accent"
           large
-          @click="action()"
+          @click="getPassword()"
         >
           Nova senha
         </v-btn>
@@ -42,7 +47,8 @@
   export default {
     data: function () {
       return {
-        uri: undefined
+        uri: undefined,
+        loading: false
       }
     },
 
@@ -55,14 +61,21 @@
     },
 
     methods: {
-      action (uri) {
-        this.$router.push('/')
+      copy (value) {
+        const copyText = document.getElementById(value)
+        copyText.select()
+        copyText.setSelectionRange(0, 99999)
+        document.execCommand('copy')
       },
 
       getPassword () {
+        this.loading = true
         Axios.get('https://api.redire.me/password')
           .then(response => {
             this.uri = response.data
+            setTimeout(() => {
+              this.loading = false
+            }, 1920)
           })
       }
     }
