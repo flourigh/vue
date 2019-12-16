@@ -4,8 +4,8 @@ export default {
       param,
       find
     ) {
-      let tempArray = []
-      let mountReturn = []
+      const tempArray = []
+      const mountReturn = []
       let tempObject
 
       function isObject (mixedVar) {
@@ -17,7 +17,7 @@ export default {
       }
 
       function object (obj) {
-        for (let key in obj) {
+        for (const key in obj) {
           tempObject = obj[key]
 
           if (isObject(obj[key])) {

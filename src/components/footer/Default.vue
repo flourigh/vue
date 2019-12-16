@@ -43,7 +43,7 @@
 
   export default {
     computed: {
-      ...mapState('Document', [ 'footer' ])
+      ...mapState('Document', ['footer'])
     },
 
     methods: {

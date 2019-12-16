@@ -11,10 +11,10 @@
         </p>
 
         <v-text-field
-          v-model="uri"
+          v-for="(keys, i) in uri"
+          :key="i"
+          v-model="uri[i]"
           color="white"
-          label="Digite um nome para seu URI"
-          @keydown.enter="action(uri)"
         />
       </v-card-text>
 
@@ -25,68 +25,19 @@
           height="56"
           color="accent"
           large
-          @click="action(uri)"
+          @click="action()"
         >
-          Criar página
+          Nova senha
         </v-btn>
       </v-card-actions>
-    </v-card>
-
-    <v-card
-      class="pa-4 mt-3"
-    >
-      <v-card-text>
-        <span>
-          Este app tem como objetivo ser uma área destinada a criação de qualquer tipo de conteúdo livre de moderação.
-        </span>
-
-        <v-divider
-          class="mt-4 mb-5"
-        />
-
-        <span>
-          As regras deste app são as leis do estado e país que você se encontra ao digitar algum conteúdo.
-        </span>
-
-        <v-divider
-          class="mt-4 mb-5"
-        />
-
-        <span>
-          Comentários Anonimos não não permitidos, logo você precisa de um Login Social de sua preferencia.
-        </span>
-
-        <v-divider
-          class="mt-4 mb-5"
-        />
-
-        <span>
-          Você pode criar um URI de sua escolha, caso este já exista, você será direcionado para o URI existente.
-          Caso não queira criar um URI de sua escolha, o URI será gerado automaticamente.
-        </span>
-
-        <v-divider
-          class="mt-4 mb-5"
-        />
-
-        <span>
-          Para ver todos os seus URIs você pode entrar no Botão "Comunidade" presente no topo da lista de comentários.
-        </span>
-
-        <v-divider
-          class="mt-4 mb-5"
-        />
-
-        <span>
-          Você pode instalar o App Disqus caso queira, não é uma obrigação.
-        </span>
-      </v-card-text>
     </v-card>
   </v-container>
 </template>
 
 <script>
   import { mapState } from 'vuex'
+
+  import Axios from 'axios'
 
   export default {
     data: function () {
@@ -96,17 +47,23 @@
     },
 
     computed: {
-      ...mapState('Document', [ 'page' ])
+      ...mapState('Document', ['page'])
+    },
+
+    mounted () {
+      this.getPassword()
     },
 
     methods: {
       action (uri) {
-        if (uri) {
-          this.$router.push(`/${uri}`)
-          return
-        }
+        this.$router.push('/')
+      },
 
-        this.$router.push(`/${this.$uuid()}`)
+      getPassword () {
+        Axios.get('https://api.redire.me/password')
+          .then(response => {
+            this.uri = response.data
+          })
       }
     }
   }

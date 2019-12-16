@@ -1,10 +1,6 @@
-const {
-  Title
-} = require('@/plugins/database/page')
-
 export default {
   page: {
-    title: Title
+    title: 'Password'
   },
 
   footer: {

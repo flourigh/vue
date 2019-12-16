@@ -1,13 +1,13 @@
 const Version = process.env.npm_package_version
-const Title = 'Social Comments'
-const Name = 'Social Comments - Crie uma página e fique a vontade'
-const Prefix = 'SocialComments'
-const Description = 'Páginas de comentários livres'
-const Subject = 'Você pode criar páginas livremente para comentar sobre qualquer coisa não Ilicita'
-const Terms = 'Qualquer conteúdo presente nas páginas é de responsábilidade do autor do conteúdo estando o programador, izento de qualquer texto publicado'
-const Color = '#121212'
+const Title = process.env.npm_package_displayName
+const Name = process.env.npm_package_name
+const Prefix = process.env.npm_package_displayName
+const Description = process.env.npm_package_description
+const Subject = process.env.npm_package_description
+const Terms = 'Nenhum password gerado ficará armazenado em nenhum servidor'
+const Color = '#996DF5'
 
-const Canonical = 'https://socialcomments.web.app/'
+const Canonical = process.env.npm_package_homepage
 
 const BaseURL = process.env.BASE_URL
   ? process.env.BASE_URL

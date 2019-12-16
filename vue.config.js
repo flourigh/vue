@@ -3,7 +3,7 @@ const {
 } = require('./src/plugins/tracking/index.js')
 
 const {
-  Name,
+  Title,
   Prefix,
   Description,
   Color,
@@ -15,13 +15,13 @@ const {
 } = require('./src/plugins/database/page')
 
 module.exports = {
-  'transpileDependencies': [
+  transpileDependencies: [
     'vuetify'
   ],
 
   pages: {
     index: {
-      title: Name,
+      title: Title,
       description: Description,
       subject: Subject,
       base: BaseURL,
@@ -35,7 +35,7 @@ module.exports = {
   },
 
   pwa: {
-    name: Name,
+    name: Title,
     themeColor: Color,
     msTileColor: Color,
     appleMobileWebAppCapable: 'yes',

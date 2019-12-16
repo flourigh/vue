@@ -1,44 +1,61 @@
 {
-  "name": "social-comment",
-  "version": "0.0.1",
+  "name": "password",
+  "displayName": "Password",
+  "icon": "./public/favicon.png",
+  "version": "0.0.1-0",
   "private": true,
+  "description": "Gerador de Password, Mnemonic e Keygen gratuito e leve",
+  "keywords": [
+    "Generator",
+    "Password",
+    "Mnemonic",
+    "Keygen",
+    "Gerador"
+  ],
+  "homepage": "https://password.redire.me",
+  "qna": "https://socialcomment.web.app/password",
+  "bugs": "https://bitbucket.org/flourigh/password-app/issues",
+  "repository": {
+    "type": "git",
+    "url": "https://bitbucket.org/flourigh/password-app.git"
+  },
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
     "test": "npm run build && serve -s dist",
     "ngrok": "ngrok http -host-header=rewrite",
     "lint": "vue-cli-service lint",
-    "deploy": "firebase deploy --only hosting:socialcomment"
+    "deploy": "firebase deploy --only hosting:password-redireme"
   },
   "dependencies": {
     "axios": "^0.19.0",
-    "core-js": "^3.3.2",
+    "core-js": "^3.5.0",
     "register-service-worker": "^1.6.2",
     "uuid": "^3.3.3",
-    "vue": "^2.6.10",
+    "vue": "^2.6.11",
     "vue-disqus": "^3.0.5",
     "vue-router": "^3.1.3",
-    "vuetify": "^2.1.0",
+    "vuetify": "^2.1.14",
     "vuex": "^3.0.1"
   },
   "devDependencies": {
-    "@vue/cli-plugin-babel": "^4.0.0",
-    "@vue/cli-plugin-eslint": "^4.0.0",
-    "@vue/cli-plugin-pwa": "^4.0.5",
-    "@vue/cli-service": "^4.0.0",
+    "@vue/cli-plugin-babel": "^4.1.1",
+    "@vue/cli-plugin-eslint": "^4.1.1",
+    "@vue/cli-plugin-pwa": "^4.1.1",
+    "@vue/cli-service": "^4.1.1",
     "babel-eslint": "^10.0.3",
     "eslint": "^5.16.0",
-    "eslint-config-vuetify": "^0.4.0",
+    "eslint-config-vuetify": "^0.4.1",
     "eslint-plugin-vue": "^5.0.0",
-    "firebase-tools": "^7.6.2",
-    "lint-staged": "^9.4.2",
+    "firebase-tools": "^7.10.0",
+    "lint-staged": "^9.5.0",
     "sass": "^1.19.0",
     "sass-loader": "^8.0.0",
     "stylus": "^0.54.7",
     "stylus-loader": "^3.0.2",
     "vue-cli-plugin-vuetify": "^1.1.1",
-    "vue-template-compiler": "^2.6.10",
-    "vuetify-loader": "^1.3.0"
+    "vue-template-compiler": "^2.6.11",
+    "vuetify-loader": "^1.4.3"
   },
   "gitHooks": {
     "pre-commit": "lint-staged"

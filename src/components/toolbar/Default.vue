@@ -50,7 +50,7 @@
     ],
 
     computed: {
-      ...mapState('Document', [ 'page' ])
+      ...mapState('Document', ['page'])
     },
 
     methods: {

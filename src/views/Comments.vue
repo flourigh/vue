@@ -28,7 +28,7 @@
 
   export default {
     computed: {
-      ...mapState('Document', [ 'page' ])
+      ...mapState('Document', ['page'])
     },
 
     methods: {
