@@ -1,5 +1,4 @@
 import Home from '@/views/Home'
-import Comments from '@/views/Comments'
 
 import {
   treeImport
@@ -17,16 +16,6 @@ const home = {
     toolbar: treeImport.Toolbar,
     default: Home,
     footer: treeImport.Footer
-  }
-}
-
-const uri = {
-  path: '/:uri',
-  name: 'comment',
-  components: {
-    toolbar: treeImport.Toolbar,
-    default: Comments,
-    footer: treeImport.Footer
   },
   meta: {
     function: [
@@ -38,6 +27,5 @@ const uri = {
 export {
   treeImport,
   wildcard,
-  home,
-  uri
+  home
 }

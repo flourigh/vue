@@ -2,7 +2,7 @@
   "name": "password",
   "displayName": "Password",
   "icon": "./public/favicon.png",
-  "version": "0.0.1-0",
+  "version": "0.0.1-1",
   "private": true,
   "description": "Gerador de Password, Mnemonic e Keygen gratuito e leve",
   "keywords": [
