@@ -1,25 +1,33 @@
 <template>
   <v-container
-    class="px-0 mx-0 mx-auto max-width-412 pb-5"
+    class="px-0 mx-0 mx-auto max-width-412"
   >
     <v-card
-      class="pa-4"
+      v-if="loading"
+      class="text-center transparent"
+    >
+      <v-progress-circular
+        :size="70"
+        :width="7"
+        color="primary"
+        indeterminate
+      />
+    </v-card>
+
+    <v-card
+      v-else
+      class="pa-4 transparent"
     >
       <v-card-text>
-        <p class="display-1 text--primary">
-          {{ page.title }}
-        </p>
-
         <v-text-field
           v-for="(keys, i) in uri"
           :id="`password-${i}`"
           :key="`password-${i}`"
           v-model="uri[i]"
-          color="accent"
+          color="primary"
           readonly
-          :loading="loading"
-          append-icon="mdi-content-copy"
-          @click:append="copy(`password-${i}`)"
+          append-outer-icon="mdi-content-copy"
+          @click:append-outer="copy(`password-${i}`)"
         />
       </v-card-text>
 
@@ -28,7 +36,7 @@
           class="mx-auto"
           width="256"
           height="56"
-          color="accent"
+          color="primary"
           large
           @click="getPassword()"
         >
@@ -62,9 +70,7 @@
 
     methods: {
       copy (value) {
-        const copyText = document.getElementById(value)
-        copyText.select()
-        copyText.setSelectionRange(0, 99999)
+        document.getElementById(value).select()
         document.execCommand('copy')
       },
 

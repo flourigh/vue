@@ -13,9 +13,7 @@ const home = {
   path: '/',
   name: 'home',
   components: {
-    toolbar: treeImport.Toolbar,
-    default: Home,
-    footer: treeImport.Footer
+    default: Home
   },
   meta: {
     function: [

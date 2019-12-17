@@ -1,15 +1,18 @@
 <template>
   <v-app
-    light
+    :style="`background: ${theme}`"
   >
-    <router-view
-      name="toolbar"
-    />
-
     <router-view />
-
-    <router-view
-      name="footer"
-    />
   </v-app>
 </template>
+
+<script>
+  export default {
+    computed: {
+      theme () {
+        if (this.$vuetify.theme.dark) return this.$vuetify.theme.themes.dark.background
+        return this.$vuetify.theme.themes.light.background
+      }
+    }
+  }
+</script>

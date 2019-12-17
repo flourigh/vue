@@ -29,7 +29,14 @@ export default new Vuetify({
 
     themes: {
       dark: {
-        accent: colors.purple
+        primary: colors.deepPurple.base,
+        secondary: colors.indigo.base,
+        accent: colors.pink.base,
+        error: colors.red.base,
+        warning: colors.deepOrange.base,
+        info: colors.amber.base,
+        success: colors.lightGreen.base,
+        background: '#000000'
       }
     }
   },
