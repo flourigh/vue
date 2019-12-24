@@ -1,0 +1,5 @@
+const Password = () => {}
+
+export {
+  Password
+}

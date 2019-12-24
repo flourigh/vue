@@ -4,8 +4,8 @@ const Name = process.env.npm_package_name
 const Prefix = process.env.npm_package_displayName
 const Description = process.env.npm_package_description
 const Subject = process.env.npm_package_description
-const Terms = 'Nenhum password gerado ficará armazenado em nenhum servidor'
-const Color = '#996DF5'
+const Terms = 'Nenhum password gerado ficará armazenado em lugar algum'
+const Color = '#000000'
 
 const Canonical = process.env.npm_package_homepage
 

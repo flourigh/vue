@@ -39,12 +39,12 @@ module.exports = {
     themeColor: Color,
     msTileColor: Color,
     appleMobileWebAppCapable: 'yes',
-    appleMobileWebAppStatusBarStyle: 'black-translucent',
+    appleMobileWebAppStatusBarStyle: 'black',
     assetsVersion: Version,
     manifestOptions: {
       short_name: Prefix,
-      start_url: `./index.html?home=${Version}`,
-      display: 'fullscreen'
+      start_url: `./?home=${Version}`,
+      display: 'standalone'
     },
     workboxPluginMode: 'GenerateSW'
   }

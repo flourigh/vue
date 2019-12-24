@@ -2,89 +2,122 @@
   <v-container
     class="px-0 mx-0 mx-auto max-width-412"
   >
-    <div
-      v-if="loading"
-      class="text-center"
+    <v-snackbar
+      v-model="snackbar.active"
+      :timeout="1920"
+      color="primary"
+      class="white--text"
     >
-      <v-dialog
-        v-model="loading"
-        persistent
-        width="300"
+      <div
+        class="mx-auto"
+        v-html="snackbar.text"
+      />
+    </v-snackbar>
+
+    <v-dialog
+      v-model="loading"
+      persistent
+      width="300"
+    >
+      <v-card
+        color="primary"
+        dark
       >
-        <v-card
-          color="primary"
-          dark
+        <v-card-text
+          class="py-5"
+        >
+          <v-progress-linear
+            indeterminate
+            color="white"
+            class="mb-0"
+          />
+        </v-card-text>
+      </v-card>
+    </v-dialog>
+
+    <v-dialog
+      v-model="active"
+      persistent
+      content-class="max-width-412"
+    >
+      <v-card
+        class="transparent"
+        flat
+      >
+        <v-expansion-panels
+          v-model="panels"
+          class="pb-5"
+          accordion
+          multiple
         >
           <v-card-text
-            class="py-5"
+            v-for="(keys, i) in passwords"
+            :key="`password-${i}`"
+            class="pa-0 ma-0"
           >
-            <v-progress-linear
-              indeterminate
-              color="white"
-              class="mb-0"
-            />
-          </v-card-text>
-        </v-card>
-      </v-dialog>
-    </div>
-
-    <div
-      v-else
-      class="text-center"
-    >
-      <v-dialog
-        v-model="uri"
-        persistent
-        content-class="max-width-412 min-height-320"
-      >
-        <v-card
-          class="pa-4 transparent"
-          flat
-        >
-          <v-card-text>
-            <v-text-field
-              v-for="(keys, i) in uri"
-              :id="`password-${i}`"
-              :key="`password-${i}`"
-              v-model="uri[i]"
-              color="primary"
-              readonly
-              append-outer-icon="mdi-content-copy"
-              @click:append-outer="copy(`password-${i}`)"
-            />
-          </v-card-text>
-
-          <v-card-actions>
-            <v-btn
-              color="primary"
-              dark
-              absolute
-              bottom
-              right
-              fab
-              @click="getPassword()"
+            <v-expansion-panel
+              class="transparent"
             >
-              <v-icon>
-                mdi-cached
-              </v-icon>
-            </v-btn>
-          </v-card-actions>
-        </v-card>
-      </v-dialog>
-    </div>
+              <v-expansion-panel-header>
+                {{ i }}
+              </v-expansion-panel-header>
+
+              <v-expansion-panel-content
+                class="pb-4"
+              >
+                <v-text-field
+                  :id="`password-${i}`"
+                  :value="keys"
+                  color="primary"
+                  readonly
+                  hide-details
+                  append-outer-icon="mdi-content-copy"
+                  @click:append-outer="copy(`password-${i}`, i, keys)"
+                />
+              </v-expansion-panel-content>
+            </v-expansion-panel>
+          </v-card-text>
+        </v-expansion-panels>
+
+        <v-card-actions>
+          <v-spacer />
+
+          <v-btn
+            color="primary"
+            dark
+            fab
+            @click="mount()"
+          >
+            <v-icon
+              color="white"
+            >
+              mdi-cached
+            </v-icon>
+          </v-btn>
+        </v-card-actions>
+      </v-card>
+    </v-dialog>
   </v-container>
 </template>
 
 <script>
-  import { mapState } from 'vuex'
+  import { mapState, mapActions } from 'vuex'
 
   import Axios from 'axios'
 
   export default {
     data: function () {
       return {
-        uri: undefined,
-        loading: false
+        panels: [0],
+
+        snackbar: {
+          active: false,
+          text: false
+        },
+
+        passwords: undefined,
+        loading: true,
+        active: false
       }
     },
 
@@ -93,24 +126,46 @@
     },
 
     mounted () {
-      this.getPassword()
+      this.start()
+      this.mount()
     },
 
     methods: {
-      copy (value) {
-        document.getElementById(value).select()
+      ...mapActions('Document', ['Password']),
+
+      copy (id, i, key) {
+        document.getElementById(id).select()
         document.execCommand('copy')
+
+        this.snackbar.active = true
+        this.snackbar.text = `${i}: ${key} copiado`
       },
 
-      getPassword () {
-        this.loading = true
+      start: function () {
+        setInterval(() => {
+          this.reload()
+          this.mount()
+        }, 60000)
+      },
+
+      mount () {
         Axios.get('https://api.redire.me/password')
           .then(response => {
-            this.uri = response.data
+            this.reload()
             setTimeout(() => {
-              this.loading = false
-            }, 1920)
+              this.passwords = response.data
+            }, 960)
           })
+      },
+
+      reload () {
+        this.loading = true
+        this.active = false
+
+        setTimeout(() => {
+          this.loading = false
+          this.active = true
+        }, 1920)
       }
     }
   }
