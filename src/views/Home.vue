@@ -18,21 +18,16 @@
       v-model="loading"
       persistent
       width="300"
+      content-class="border-radius-0"
+      hide-overlay
     >
-      <v-card
-        color="primary"
-        dark
-      >
-        <v-card-text
-          class="py-5"
-        >
-          <v-progress-linear
-            indeterminate
-            color="white"
-            class="mb-0"
-          />
-        </v-card-text>
-      </v-card>
+      <div class="janrubio text-center">
+        <div
+          v-for="shaft in 5"
+          :key="shaft"
+          :class="`shaft ${shaft}`"
+        />
+      </div>
     </v-dialog>
 
     <v-dialog
@@ -80,12 +75,23 @@
         </v-expansion-panels>
 
         <v-card-actions>
-          <v-spacer />
+          <v-spacer
+            class="px-4"
+          >
+            <v-progress-linear
+              v-model="timeout.value"
+              :active="timeout.show"
+              :indeterminate="timeout.query"
+              :query="true"
+              rounded
+            />
+          </v-spacer>
 
           <v-btn
             color="primary"
             dark
             fab
+            small
             @click="mount()"
           >
             <v-icon
@@ -110,6 +116,13 @@
       return {
         panels: [0],
 
+        timeout: {
+          value: 0,
+          query: false,
+          show: true,
+          interval: 0
+        },
+
         snackbar: {
           active: false,
           text: false
@@ -128,6 +141,10 @@
     mounted () {
       this.start()
       this.mount()
+    },
+
+    beforeDestroy () {
+      clearInterval(this.interval)
     },
 
     methods: {
@@ -154,6 +171,7 @@
             this.reload()
             setTimeout(() => {
               this.passwords = response.data
+              this.progressout()
             }, 960)
           })
       },
@@ -166,6 +184,25 @@
           this.loading = false
           this.active = true
         }, 1920)
+      },
+
+      progressout () {
+        this.timeout.query = true
+        this.timeout.show = true
+        this.timeout.value = 0
+        const time = 100
+
+        setTimeout(() => {
+          this.timeout.query = false
+          this.timeout.interval = setInterval(() => {
+            if (this.timeout.value === time) {
+              clearInterval(this.timeout.interval)
+              this.timeout.show = false
+              return setTimeout(this.progressout, 2000)
+            }
+            this.timeout.value += 2
+          }, 1000)
+        }, 2500)
       }
     }
   }
