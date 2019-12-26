@@ -42,9 +42,20 @@ module.exports = {
     appleMobileWebAppStatusBarStyle: 'black',
     assetsVersion: Version,
     manifestOptions: {
+      version: Version,
+      manifest_version: 2,
       short_name: Prefix,
       start_url: `./?home=${Version}`,
-      display: 'standalone'
+      display: 'standalone',
+      browser_action: {
+        default_popup: 'index.html',
+        default_title: Title,
+        default_icon: {
+          128: './img/icons/favicon-128x128.png',
+          32: './img/icons/favicon-32x32.png',
+          16: './img/icons/favicon-16x16.png'
+        }
+      }
     },
     workboxPluginMode: 'GenerateSW'
   }

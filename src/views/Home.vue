@@ -66,6 +66,7 @@
                   color="primary"
                   readonly
                   hide-details
+                  :loading="timeout.indeterminate"
                   append-outer-icon="mdi-content-copy"
                   @click:append-outer="copy(`password-${i}`, i, keys)"
                 />
@@ -80,8 +81,9 @@
           >
             <v-progress-linear
               v-model="timeout.value"
-              :active="timeout.show"
-              :indeterminate="timeout.query"
+              :buffer-value="timeout.buffer"
+              :active="timeout.active"
+              :indeterminate="timeout.indeterminate"
               :query="true"
               rounded
             />
@@ -92,7 +94,7 @@
             dark
             fab
             small
-            @click="mount()"
+            @click="reload()"
           >
             <v-icon
               color="white"
@@ -116,11 +118,17 @@
       return {
         panels: [0],
 
+        conf: {
+          interval: 960,
+          reload: 60000
+        },
+
         timeout: {
           value: 0,
-          query: false,
-          show: true,
-          interval: 0
+          buffer: 0,
+          active: true,
+          indeterminate: false,
+          interval: undefined
         },
 
         snackbar: {
@@ -140,15 +148,26 @@
 
     mounted () {
       this.start()
-      this.mount()
-    },
-
-    beforeDestroy () {
-      clearInterval(this.interval)
     },
 
     methods: {
       ...mapActions('Document', ['Password']),
+
+      start: function () {
+        this.mount()
+
+        this.loading = true
+        this.active = false
+
+        setInterval(() => {
+          this.mount()
+        }, this.conf.reload)
+      },
+
+      reload () {
+        this.timeout.indeterminate = true
+        this.mount()
+      },
 
       copy (id, i, key) {
         document.getElementById(id).select()
@@ -158,51 +177,38 @@
         this.snackbar.text = `${i}: ${key} copiado`
       },
 
-      start: function () {
-        setInterval(() => {
-          this.reload()
-          this.mount()
-        }, 60000)
-      },
-
       mount () {
         Axios.get('https://api.redire.me/password')
           .then(response => {
-            this.reload()
             setTimeout(() => {
-              this.passwords = response.data
+              clearInterval(this.timeout.interval)
               this.progressout()
-            }, 960)
+              this.loading = false
+              this.active = true
+              this.passwords = response.data
+            }, this.conf.interval)
           })
       },
 
-      reload () {
-        this.loading = true
-        this.active = false
-
-        setTimeout(() => {
-          this.loading = false
-          this.active = true
-        }, 1920)
-      },
-
       progressout () {
-        this.timeout.query = true
-        this.timeout.show = true
         this.timeout.value = 0
-        const time = 100
+        this.timeout.buffer = 100
+        this.timeout.active = true
+        this.timeout.indeterminate = true
+
+        const calc = (((this.timeout.buffer * 1000) - (this.conf.interval * 2)) / this.conf.reload)
 
         setTimeout(() => {
-          this.timeout.query = false
+          this.timeout.indeterminate = false
           this.timeout.interval = setInterval(() => {
-            if (this.timeout.value === time) {
+            if (this.timeout.value >= this.timeout.buffer) {
               clearInterval(this.timeout.interval)
-              this.timeout.show = false
-              return setTimeout(this.progressout, 2000)
+              this.timeout.active = false
+              return setTimeout(this.progressout, this.conf.interval)
             }
-            this.timeout.value += 2
+            this.timeout.value += calc
           }, 1000)
-        }, 2500)
+        }, this.conf.interval)
       }
     }
   }
