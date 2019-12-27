@@ -1,8 +1,8 @@
+.vscode
 .DS_Store
 
 node_modules
-package.json
-/dist
+dist
 
 .firebase
 .firebaserc
@@ -13,9 +13,7 @@ firebase.json
 .env.*.local
 
 # Log files
-npm-debug.log*
-yarn-debug.log*
-yarn-error.log*
+*.log*
 
 # Editor directories and files
 .idea
