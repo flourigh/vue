@@ -1,5 +1,7 @@
 <template>
-  <v-toolbar>
+  <v-toolbar
+    color="black"
+  >
     <v-spacer />
 
     <v-menu
@@ -81,7 +83,7 @@
           class="transparent"
           block
           x-large
-          @click="socialLogin('google')"
+          @click="google()"
         >
           Google
         </v-btn>
@@ -98,12 +100,12 @@
       ...mapState('Login', ['login'])
     },
 
-    methods: {
-      ...mapActions('Login', ['sign', 'loading', 'google', 'logout']),
+    created () {
+      this.status()
+    },
 
-      socialLogin (method) {
-        this.google(this.$firebase)
-      }
+    methods: {
+      ...mapActions('Login', ['status', 'google', 'logout'])
     }
   }
 </script>

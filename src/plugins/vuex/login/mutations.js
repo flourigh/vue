@@ -1,6 +1,4 @@
 const SIGN = (state, payload) => {
-  console.log(payload)
-
   state.login.status = true
   state.login.user.name = payload.user.displayName
   state.login.user.avatar = payload.user.photoURL

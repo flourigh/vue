@@ -1,14 +1,33 @@
+import Firebase from 'firebase/app'
+import 'firebase/auth'
+
 const sign = ({ commit }, object) => {
   commit('Login/SIGN',
     object
   , { root: true })
 }
 
-const logout = ({ commit }) => {
-  commit('Login/LOGOUT', {}, { root: true })
+const status = ({ dispatch }) => {
+  return new Promise(() => {
+    Firebase.auth().onAuthStateChanged(() => {
+      if (Firebase.auth().currentUser) {
+        dispatch('Login/sign',
+          {
+            user: Firebase.auth().currentUser
+          }
+        , { root: true })
+      }
+    })
+  })
 }
 
-const google = ({ commit, dispatch }, firebase) => {
+const logout = ({ commit }) => {
+  commit('Login/LOGOUT', {}, { root: true })
+
+  Firebase.auth().signOut()
+}
+
+const google = ({ commit, dispatch }) => {
   function loading (value) {
     dispatch('Login/loading',
       value
@@ -26,12 +45,12 @@ const google = ({ commit, dispatch }, firebase) => {
     loading(false)
   }
 
-  const provider = new firebase.auth.GoogleAuthProvider()
+  const provider = new Firebase.auth.GoogleAuthProvider()
 
   return new Promise(() => {
     loading(true)
 
-    firebase.auth().signInWithPopup(provider)
+    Firebase.auth().signInWithPopup(provider)
       .then(response => {
         save(response)
       }).catch(error => {
@@ -48,6 +67,7 @@ const loading = ({ commit }, value) => {
 
 export {
   sign,
+  status,
   logout,
   google,
   loading
