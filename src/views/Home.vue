@@ -34,6 +34,8 @@
       v-model="active"
       persistent
       content-class="max-width-412"
+      hide-overlay
+      no-click-animation
     >
       <v-card
         class="transparent"

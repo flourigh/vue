@@ -6,9 +6,11 @@ dist
 
 .firebase
 .firebaserc
+.firebase.js
 firebase.json
 
 # local env files
+.env.js
 .env.local
 .env.*.local
 
