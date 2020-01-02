@@ -59,6 +59,38 @@ const google = ({ commit, dispatch }) => {
   })
 }
 
+const microsoft = ({ commit, dispatch }) => {
+  function loading (value) {
+    dispatch('Login/loading',
+      value
+    , { root: true })
+  }
+
+  function save (value) {
+    dispatch('Login/sign',
+      value
+    , { root: true })
+    loading(false)
+  }
+
+  function cancel () {
+    loading(false)
+  }
+
+  const provider = new Firebase.auth.OAuthProvider('microsoft.com')
+
+  return new Promise(() => {
+    loading(true)
+
+    Firebase.auth().signInWithPopup(provider)
+      .then(response => {
+        save(response)
+      }).catch(error => {
+        cancel(error)
+      })
+  })
+}
+
 const loading = ({ commit }, value) => {
   commit('Login/LOADING',
     value
@@ -70,5 +102,6 @@ export {
   status,
   logout,
   google,
+  microsoft,
   loading
 }

@@ -24,7 +24,7 @@
             size="36"
           >
             <v-img
-              v-if="login.status"
+              v-if="login.status && login.user.avatar"
               :src="login.user.avatar"
               :alt="login.user.name"
             />
@@ -32,8 +32,9 @@
             <v-icon
               v-else
               dark
+              :color="login.user.avatar ? 'white' : 'success'"
             >
-              {{ login.user.avatar }}
+              {{ login.user.avatar ? login.user.avatar : 'mdi-checkbox-blank-circle-outline' }}
             </v-icon>
           </v-avatar>
         </div>
@@ -74,20 +75,45 @@
         </v-list>
       </v-card>
 
-      <v-list
+      <div
         v-else
-        color="blue"
-        class="ma-0 pa-0"
       >
-        <v-btn
-          class="transparent"
-          block
-          x-large
-          @click="google()"
+        <div
+          class="my-3"
         >
-          Google
-        </v-btn>
-      </v-list>
+          <v-list
+            color="blue"
+            class="ma-0 pa-0"
+          >
+            <v-btn
+              class="transparent"
+              block
+              x-large
+              @click="google()"
+            >
+              Google
+            </v-btn>
+          </v-list>
+        </div>
+
+        <div
+          class="my-3"
+        >
+          <v-list
+            color="red"
+            class="ma-0 pa-0"
+          >
+            <v-btn
+              class="transparent"
+              block
+              x-large
+              @click="microsoft()"
+            >
+              Microsoft
+            </v-btn>
+          </v-list>
+        </div>
+      </div>
     </v-menu>
   </v-toolbar>
 </template>
@@ -105,7 +131,7 @@
     },
 
     methods: {
-      ...mapActions('Login', ['status', 'google', 'logout'])
+      ...mapActions('Login', ['status', 'google', 'microsoft', 'logout'])
     }
   }
 </script>
