@@ -1,0 +1,40 @@
+// https://codepen.io/kjbrum
+
+$primarycolor = var(--v-primary-base)
+$accentcolor = var(--v-primary-darken5)
+
+.kjbrum > div
+  background $primarycolor
+  height 5px
+  width 5px // calc(10% - 5.4px)
+  display inline-block
+  border-radius 25px
+  margin 0 1px
+  animation cssload-wave 1.15s infinite ease-in-out
+  .shaft
+    &-1
+      animation-delay 0.06s
+    &-2
+      animation-delay 0.12s
+    &-3
+      animation-delay 0.17s
+    &-4
+      animation-delay 0.23s
+    &-5
+      animation-delay 0.29s
+    &-6
+      animation-delay 0.35s
+    &-7
+      animation-delay 0.4s
+    &-8
+      animation-delay 0.46s
+    &-9
+      animation-delay 0.52s
+    &-10
+      animation-delay 0.58s
+
+@keyframes cssload-wave
+  80%
+    background $accentcolor
+    margin-right 5px
+    transform translateX"("-10px")"

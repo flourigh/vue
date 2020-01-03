@@ -18,27 +18,24 @@
       v-model="loading"
       persistent
       width="300"
+      content-class="border-radius-0"
+      hide-overlay
     >
-      <v-card
-        color="primary"
-        dark
-      >
-        <v-card-text
-          class="py-5"
-        >
-          <v-progress-linear
-            indeterminate
-            color="white"
-            class="mb-0"
-          />
-        </v-card-text>
-      </v-card>
+      <div class="janrubio text-center">
+        <div
+          v-for="shaft in 5"
+          :key="shaft"
+          :class="`shaft ${shaft}`"
+        />
+      </div>
     </v-dialog>
 
     <v-dialog
       v-model="active"
       persistent
       content-class="max-width-412"
+      hide-overlay
+      no-click-animation
     >
       <v-card
         class="transparent"
@@ -71,6 +68,7 @@
                   color="primary"
                   readonly
                   hide-details
+                  :loading="timeout.indeterminate"
                   append-outer-icon="mdi-content-copy"
                   @click:append-outer="copy(`password-${i}`, i, keys)"
                 />
@@ -80,13 +78,25 @@
         </v-expansion-panels>
 
         <v-card-actions>
-          <v-spacer />
+          <v-spacer
+            class="px-4"
+          >
+            <v-progress-linear
+              v-model="timeout.value"
+              :buffer-value="timeout.buffer"
+              :active="timeout.active"
+              :indeterminate="timeout.indeterminate"
+              :query="true"
+              rounded
+            />
+          </v-spacer>
 
           <v-btn
             color="primary"
             dark
             fab
-            @click="mount()"
+            small
+            @click="reload()"
           >
             <v-icon
               color="white"
@@ -110,6 +120,19 @@
       return {
         panels: [0],
 
+        conf: {
+          interval: 960,
+          reload: 60000
+        },
+
+        timeout: {
+          value: 0,
+          buffer: 0,
+          active: true,
+          indeterminate: false,
+          interval: undefined
+        },
+
         snackbar: {
           active: false,
           text: false
@@ -127,11 +150,26 @@
 
     mounted () {
       this.start()
-      this.mount()
     },
 
     methods: {
       ...mapActions('Document', ['Password']),
+
+      start: function () {
+        this.mount()
+
+        this.loading = true
+        this.active = false
+
+        setInterval(() => {
+          this.mount()
+        }, this.conf.reload)
+      },
+
+      reload () {
+        this.timeout.indeterminate = true
+        this.mount()
+      },
 
       copy (id, i, key) {
         document.getElementById(id).select()
@@ -141,31 +179,38 @@
         this.snackbar.text = `${i}: ${key} copiado`
       },
 
-      start: function () {
-        setInterval(() => {
-          this.reload()
-          this.mount()
-        }, 60000)
-      },
-
       mount () {
         Axios.get('https://api.redire.me/password')
           .then(response => {
-            this.reload()
             setTimeout(() => {
+              clearInterval(this.timeout.interval)
+              this.progressout()
+              this.loading = false
+              this.active = true
               this.passwords = response.data
-            }, 960)
+            }, this.conf.interval)
           })
       },
 
-      reload () {
-        this.loading = true
-        this.active = false
+      progressout () {
+        this.timeout.value = 0
+        this.timeout.buffer = 100
+        this.timeout.active = true
+        this.timeout.indeterminate = true
+
+        const calc = (((this.timeout.buffer * 1000) - (this.conf.interval * 2)) / this.conf.reload)
 
         setTimeout(() => {
-          this.loading = false
-          this.active = true
-        }, 1920)
+          this.timeout.indeterminate = false
+          this.timeout.interval = setInterval(() => {
+            if (this.timeout.value >= this.timeout.buffer) {
+              clearInterval(this.timeout.interval)
+              this.timeout.active = false
+              return setTimeout(this.progressout, this.conf.interval)
+            }
+            this.timeout.value += calc
+          }, 1000)
+        }, this.conf.interval)
       }
     }
   }

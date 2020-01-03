@@ -14,6 +14,10 @@ import '@/assets/stylus/bottom.styl'
 import '@/assets/stylus/left.styl'
 
 import '@/assets/stylus/filter.styl'
+import '@/assets/stylus/border.styl'
+
+import '@/assets/stylus/animations/loading/kjbrum.styl'
+import '@/assets/stylus/animations/loading/janrubio.styl'
 
 import colors from 'vuetify/lib/util/colors'
 
