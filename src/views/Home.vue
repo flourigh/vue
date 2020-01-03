@@ -43,9 +43,8 @@
       >
         <v-expansion-panels
           v-model="panels"
-          class="pb-5"
-          accordion
-          multiple
+          class="min-height-64"
+          mandatory
         >
           <v-card-text
             v-for="(keys, i) in passwords"
@@ -55,27 +54,61 @@
             <v-expansion-panel
               class="transparent"
             >
-              <v-expansion-panel-header>
-                {{ i }}
-              </v-expansion-panel-header>
-
-              <v-expansion-panel-content
-                class="pb-4"
-              >
+              <v-expansion-panel-content>
                 <v-text-field
                   :id="`password-${i}`"
                   :value="keys"
-                  color="primary"
+                  color="success"
                   readonly
                   hide-details
-                  :loading="timeout.indeterminate"
+                  solo
+                  :disabled="timeout.indeterminate"
                   append-outer-icon="mdi-content-copy"
+                  @click="copy(`password-${i}`, i, keys)"
                   @click:append-outer="copy(`password-${i}`, i, keys)"
                 />
               </v-expansion-panel-content>
             </v-expansion-panel>
           </v-card-text>
         </v-expansion-panels>
+
+        <v-card-actions>
+          <v-slide-group
+            v-model="panels"
+            center-active
+            mandatory
+            class="mx-auto"
+          >
+            <v-slide-item
+              v-for="value in passwords"
+              :key="value"
+              v-slot:default="{ active, toggle }"
+            >
+              <v-card
+                :color="active ? 'primary' : 'grey darken-1'"
+                class="ma-4"
+                height="32"
+                width="32"
+                @click="toggle"
+              >
+                <v-row
+                  class="fill-height"
+                  align="center"
+                  justify="center"
+                >
+                  <v-scale-transition>
+                    <v-icon
+                      v-if="active"
+                      color="white"
+                      size="16"
+                      v-text="'mdi-check'"
+                    />
+                  </v-scale-transition>
+                </v-row>
+              </v-card>
+            </v-slide-item>
+          </v-slide-group>
+        </v-card-actions>
 
         <v-card-actions>
           <v-spacer
@@ -118,7 +151,7 @@
   export default {
     data: function () {
       return {
-        panels: [0],
+        panels: 0,
 
         conf: {
           interval: 960,

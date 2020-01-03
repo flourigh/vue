@@ -1,6 +1,8 @@
 <template>
   <v-toolbar
     color="black"
+    absolute
+    width="100%"
   >
     <v-spacer />
 
