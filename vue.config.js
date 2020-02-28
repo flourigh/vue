@@ -12,7 +12,7 @@ const {
 
 const {
   GeoTag
-} = require('./src/plugins/tracking/index')
+} = require('./src/plugins/tracking')
 
 module.exports = {
   transpileDependencies: [
