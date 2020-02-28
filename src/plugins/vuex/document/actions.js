@@ -1,5 +1,0 @@
-const Password = () => {}
-
-export {
-  Password
-}

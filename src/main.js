@@ -7,15 +7,10 @@ import vuetify from '@/plugins/vuetify'
 
 import '@/registerServiceWorker'
 
-import * as firebase from 'firebase/app'
-import 'firebase/auth'
-import firebaseConfig from '@/.firebase'
-
-firebase.initializeApp(firebaseConfig)
+Vue.prototype.$env = (env) => process.env.VUE_APP_NODE_ENV === env
+Vue.prototype.$empty = (obj) => Object.entries(obj).length === 0 && obj.constructor === Object
 
 Vue.config.productionTip = false
-
-Vue.prototype.$firebase = firebase
 
 new Vue({
   store,

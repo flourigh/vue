@@ -27,8 +27,6 @@ export default {
       } catch {
         query = false
       }
-
-      console.log(query)
     }
   }
 }

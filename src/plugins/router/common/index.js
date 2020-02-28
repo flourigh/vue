@@ -5,8 +5,8 @@ import {
 } from '@/plugins/router/common/treeImport'
 
 const wildcard = {
-    path: '*',
-    redirect: '/'
+  path: '*',
+  redirect: '/'
 }
 
 const home = {

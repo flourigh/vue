@@ -1,8 +1,4 @@
 const {
-  GeoTag
-} = require('./src/plugins/tracking/index')
-
-const {
   Title,
   Prefix,
   Description,
@@ -12,7 +8,11 @@ const {
   Canonical,
   VerificationToken,
   Subject
-} = require('./src/plugins/database/page')
+} = require('./src/data/page')
+
+const {
+  GeoTag
+} = require('./src/plugins/tracking/index')
 
 module.exports = {
   transpileDependencies: [
@@ -29,7 +29,7 @@ module.exports = {
       google: {
         VerifyToken: VerificationToken.Google
       },
-      geotag: GeoTag,
+      geotag: GeoTag.then(response => { return { ...response } }),
       entry: './src/main'
     }
   },

@@ -1,6 +1,6 @@
 export default {
   page: {
-    title: 'Password'
+    title: 'Vue'
   },
 
   footer: {

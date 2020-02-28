@@ -4,8 +4,6 @@
     :style="`background: ${theme}`"
   >
     <v-content>
-      <toolbar-login />
-
       <v-container
         class="fill-height"
         fluid
@@ -22,13 +20,7 @@
 </template>
 
 <script>
-  import ToolbarLogin from '@/components/toolbar/Login'
-
   export default {
-    components: {
-      ToolbarLogin
-    },
-
     computed: {
       theme () {
         if (this.$vuetify.theme.dark) return this.$vuetify.theme.themes.dark.background
