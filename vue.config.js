@@ -1,6 +1,6 @@
 const {
   GeoTag
-} = require('./src/plugins/tracking/index.js')
+} = require('./src/plugins/tracking/index')
 
 const {
   Title,

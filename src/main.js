@@ -9,7 +9,7 @@ import '@/registerServiceWorker'
 
 import * as firebase from 'firebase/app'
 import 'firebase/auth'
-import firebaseConfig from '@/.firebase.js'
+import firebaseConfig from '@/.firebase'
 
 firebase.initializeApp(firebaseConfig)
 
