@@ -28,7 +28,7 @@
     "icon": "sh icon.sh"
   },
   "dependencies": {
-    "axios": "^0.19.2",
+    "axios": "^0.21.1",
     "core-js": "^3.6.4",
     "crypto-js": "^3.3.0",
     "firebase": "^7.9.2",
